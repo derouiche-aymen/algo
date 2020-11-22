@@ -1,0 +1,131 @@
+ALGORITHM sum-uniq1
+VAR
+    i,j,sum,test: INTEGER
+    T1,T2: ARRAY_OF INTEGER[length];
+BEGIN
+    READ (T1);
+    READ (T2);
+    i:=0;
+    j:=0;
+    
+    sum:=0;
+    FOR i FROM 0 TO T1.length-1 STEP 1  DO
+    test:=0;
+    FOR j FROM 0 TO T2.length-1 STEP 1  DO
+        IF (T1[i]<>T2[j]) THEN
+            test:=test+1;
+        END_IF
+    END_FOR
+    IF (test=T2.length-1) THEN
+        sum:=sum+T1[i];
+    END_IF
+    END_FOR
+    
+
+    FOR i FROM 0 TO T2.length-1 STEP 1  DO
+    test:=0;
+    FOR j FROM 0 TO T1.length-1 STEP 1  DO
+        IF (T2[i]<>T1[j]) THEN
+            test:=test+1;
+        END_IF
+    END_FOR
+    IF (test=T1.length-1) THEN
+        sum:=sum+T2[i];
+    END_IF
+    END_FOR
+    write (sum);
+END
+
+
+
+
+ALGORITHM sum-uniq2
+VAR
+    i,sum:INTEGER;
+    set1,set2 : HASH_TABLE<INTEGER,INTEGER>.
+    key : ARRAY_OF INTEGER[10];
+
+BEGIN
+    set1.insert(3,1);
+    set1.insert(1,1);
+    set1.insert(7,1);
+    set1.insert(9,1);
+    set2.insert(2,1);
+    set2.insert(4,1);
+    set2.insert(1,1);
+    set2.insert(9,1);
+    set2.insert(3,1);
+    sum:=0;
+    key:=set2.keys();
+    
+    FOR i FROM 0 TO set2.length-1 STEP 1  DO
+        IF (set1.lookup(set2[i])=FALSE) THEN
+        sum:=sum+key[i];
+        END_IF
+
+    END_FOR
+    key:=set1.key();
+    FOR i FROM 0 TO set1.length-1 STEP 1  DO
+        IF (set2.lookup(set1[i])=FALSE) THEN
+        sum:=sum+key[i];
+    END_FOR
+    write(sum)
+END
+
+
+
+
+ALGORITHM sum-repet1
+VAR
+    set1,set2,test: ARRAY_OF INTEGER[10];
+    i,j,,sum:INTEGER;
+BEGIN
+    READ(set1);
+    READ(set2);
+    sum:=0;
+    k:=0;
+    FOR i FROM 0 TO set1.length-1 STEP 1  DO
+        FOR j FROM 0 TO set2.length-1 STEP 1  DO
+            IF (set1[i]=set2[j]) THEN
+                sum:=sum+(set1[i]*2);
+                test[k]:=set1[i];
+                k:=k+1;
+            END_IF
+        END_FOR
+    END_FOR
+    write(sum);
+    write(test);
+END
+
+
+
+
+ALGORITHM sum-repet2
+VAR
+    i,j,sum:INTEGER;
+    set1,set2 : HASH_TABLE<INTEGER,INTEGER>.
+    key,value : ARRAY_OF INTEGER[10];
+BEGIN
+    set1.insert(12,1);
+    set1.insert(13,1);
+    set1.insert(6,1);
+    set1.insert(10,1);
+    set2.insert(13,1);
+    set2.insert(10,1);
+    set2.insert(16,1);
+    set2.insert(15,1);
+    sum:=0;
+    key:=set2.keys();
+    j:=0;
+    FOR i FROM 0 TO set2.length-1 STEP 1  DO
+        IF (set1.lookup(set2[i])=TRUE) THEN
+        sum:=sum+(key[i]*2);
+        test[j]:=key[i];
+        j:=j+1;
+        END_IF
+
+    END_FOR
+    write(sum);
+    write(test);
+END
+
